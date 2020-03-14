@@ -1,0 +1,55 @@
+
+.icon {
+    color: #555;
+    font-size: .85em;
+    /* To get crisp results, use sizes that are
+    a multiple of 20; because Linearicons was
+    designed on a 20 by 20 grid. */
+    padding: 5px;
+    border: 3px solid;
+  }
+  
+  .patch {
+    
+    max-width: 200px;
+    max-height: 200px;
+    background-color: #FFF;
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .property {
+    margin: 0;
+    background-color: #FFF;
+    padding: 10px;
+  }
+  
+  .property-text {
+    margin-left: 10px;
+  }
+  
+  .container {
+    display: flex;
+    /* background-color: #ccc; */
+    align-items: center;
+  }
+  
+  .container-grid {
+    margin-right: 10px;
+    flex: 2 1 auto;
+    margin-top: 10px;
+    margin-bottom: 10px
+  }
+  
+  .link {
+    color: #555; 
+    text-decoration: none;
+    font-size: .90em
+  }
+  
+  a.link:hover {
+    color: #3835FF;
+  }

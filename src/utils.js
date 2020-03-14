@@ -7,19 +7,28 @@ import get from 'lodash/get';
  * @param {int} querylimit - how many items you want to limt the search to
  */
 export const createJSONQuery = (findQueryData=null, querylimit=15) => {
+    
     // Using string building methods for GraphQL construction will work for simple cases but is not ideal
     // especially since it makes it much harder to modify how much or how little info you want back in your query
     // TODO - implement a more robust system for query generation
+    
     let find = findQueryData ? `, find: ${JSON.stringify(findQueryData)}` : "";
     const queryTemplate = `{
-    launchesPast(limit: ${querylimit}${find}) {
-        mission_name
-        launch_date_local
-        launch_site {
-        site_name_long
+        launchesPast(limit: ${querylimit}${find}) {
+          mission_name
+          launch_date_local
+          launch_site {
+            site_name_long
+          }
+          links {
+            video_link
+            mission_patch_small
+          }
+          rocket {
+            rocket_name
+          }
         }
-    }
-    }`;
+      }`;
 
     return {
         query: queryTemplate,
@@ -44,3 +53,19 @@ export const runQuery = async (jsonQuery, onError) => {
     });
     return get(queryResults, ["data", "launchesPast"], []);
 };
+
+
+/**
+ * method to format a date string into something a bit more readable
+ * @param {String} dateString - a date string that can be parsed by javascript date object
+ * @return {String} - formatted date string using usr locale settings
+ */
+export const getFormattedDate = (dateString) => {
+    let date  = new Date(dateString);
+
+    if(date && !isNaN(date.getTime())) {
+      return date.toLocaleDateString();
+    }
+
+    return dateString;
+  };
