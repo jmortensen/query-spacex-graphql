@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Results from './Results'
+import {createJSONQuery} from './utils'
 import './App.css';
 
+
 function App() {
+  const [jsonQuery, setJsonQuery] = useState(null);
+
+  const toggleDisplay = () => {
+    setJsonQuery(createJSONQuery());
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div><button onClick={toggleDisplay}>Show Results</button></div>
+      <Results jsonQuery={jsonQuery ? jsonQuery: null} />
     </div>
   );
 }
 
 export default App;
+
+
