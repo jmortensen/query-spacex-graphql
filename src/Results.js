@@ -20,7 +20,13 @@ function Results(props) {
     
     return (
       <div className="result-list">
-        {error && <div><p>Couldn't load any results</p></div>}
+        {(error || launchList.length == 0) && 
+        <div style={{backgroundColor: "white", textAlign: "center"}}>
+          <p style={{padding: "5px", color: "red"}}>
+            <span className="lnr lnr-cross-circle"></span>
+            <span style={{paddingLeft: "5px"}}>No Results</span>
+          </p>
+        </div>}
         {launchList.map((launch, index) => 
           <ResultCard key={index} launch={launch} />
         )}
