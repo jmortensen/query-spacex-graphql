@@ -3,6 +3,10 @@ Welcome to a small example of using GraphQL and React to query SpaceX's API
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+You'll want to have `yarn` [installed]([https://classic.yarnpkg.com/en/docs/install/#mac-stable) to run this project 
+
+After cloning the repo make sure you run `yarn install`
+
 ## Available Scripts
 
 In the project directory, you can run:
