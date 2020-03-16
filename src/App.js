@@ -12,8 +12,8 @@ function App() {
     const {mission="", rocket="", launchYear=""} = data;
     const newQueryProps = {launch_year: launchYear, mission_name: mission, rocket_name: rocket};
     const newJSONQuery = createJSONQuery(newQueryProps);
-    if(JSON.stringify(jsonQuery) != JSON.stringify(newJSONQuery)) {
-      console.log("should set new query");
+
+    if(JSON.stringify(jsonQuery) !== JSON.stringify(newJSONQuery)) {
       setJSONQuery(newJSONQuery);
     }
   }
