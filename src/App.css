@@ -3,5 +3,22 @@
   margin: 0 auto; 
   padding-bottom: 20px;
   font-size: 30px;
+  margin-top: 10px;
 }
 
+.header {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  width: 100%;
+  height: 200px;
+  background-size: cover; 
+  background-image: url('https://www.spacex.com/sites/spacex/files/styles/featured_news_widget_image/public/field/image/jcsat18_pad39a_streak_website.jpg');
+  background-color: black;
+}
+
+.header-text {
+  color: #FFF;
+  text-align: center;
+}

@@ -1,24 +1,61 @@
+import React, { useState, useEffect } from 'react';
+import './Search.css';
+
+const Search = props => {
+    const {onSearch} = props;
+    const [mission, setMission] = useState("");
+    const [rocket, setRocket] = useState("");
+    const [launchYear, setLaunchYear] = useState("");
+
+    const searchClicked = () => {
+        if (onSearch) {
+            const queryObject = {
+                mission,
+                rocket,
+                launchYear
+            };
+            onSearch(queryObject);
+        }
+    };
+
+    const clearClicked = () => {
+        setMission("");
+        setRocket("");
+        setLaunchYear("");
+        onSearch({}); 
+    };
+
+    const onMissionChanged = (e) => {
+        setMission(e.target.value);
+    };
+
+    const onRockectChanged = (e) => {
+        setRocket(e.target.value);
+    };
+
+    const onLaunchYearChanged = (e) => {
+        setLaunchYear(e.target.value);
+    };
+
+    return (
+        <div className="search-form">
+            <div style={{width: "350px"}}>
+            <div style={{display: "flex", flexDirection: "column", alignItems:"center", backgroundColor: "white"}}>
+                <label><span className="search-form-text-label">Mission</span><input className="search-form-text-input" type="text" value={mission} onChange={onMissionChanged}></input></label>
+                <label><span className="search-form-text-label">Rocket</span><input className="search-form-text-input" type="text" value={rocket} onChange={onRockectChanged}></input></label>
+                <label><span className="search-form-text-label">Year</span><input className="search-form-text-input" type="text" value={launchYear} onChange={onLaunchYearChanged}></input></label>
+            </div>
+            <div style={{display: "flex", justifyContent: "center", backgroundColor: "white", paddingTop:"10px", paddingBottom: "10px"}}>
+                <button className="searchBtn" onClick={searchClicked}><span className="lnr lnr-magnifier"></span>Search</button>
+                <button className="searchBtn" onClick={clearClicked} style={{marginLeft: "10px"}}><span className="lnr lnr-cross"></span>Clear</button>
+            </div>
+            </div>
+        </div>
+    );
+}
+
+export default Search;
 
 
 
-// <svg class="h-4 w-4 fill-current text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path></svg>
-const phoneIcon = ({
-    style = {},
-    fill = '#fff',
-    width = '100%',
-    className = '',
-    height = '100%',
-    viewBox = '0 0 32 32',
-  }) => 
-    <svg
-      width={width}
-      style={style}
-      height={height}
-      viewBox={viewBox}
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-    >
-        <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" fill={fill}/>
-    </svg>;
 

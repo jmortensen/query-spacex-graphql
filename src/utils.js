@@ -5,14 +5,15 @@ import get from 'lodash/get';
  * method to create an object that will represent a grpahQL query
  * @param {String} findQueryData - should be a JSON string of search strings
  * @param {int} querylimit - how many items you want to limt the search to
+ * @return {Object} - a JSON object which can be sent to a graphQL server
  */
-export const createJSONQuery = (findQueryData=null, querylimit=15) => {
+export const createJSONQuery = (findQueryData=null, querylimit=30) => {
     
     // Using string building methods for GraphQL construction will work for simple cases but is not ideal
     // especially since it makes it much harder to modify how much or how little info you want back in your query
     // TODO - implement a more robust system for query generation
     
-    let find = findQueryData ? `, find: ${JSON.stringify(findQueryData)}` : "";
+    let find = findQueryData ? `, find: ${stringifyObjectWithNoQuotes(findQueryData)}` : "";
     const queryTemplate = `{
         launchesPast(limit: ${querylimit}${find}) {
           mission_name
@@ -39,17 +40,14 @@ export const createJSONQuery = (findQueryData=null, querylimit=15) => {
 /**
  * method to query the graphQL service through a proxy url
  * @param {Object} jsonQuery - this is an object that represents the graphQL query
- * @param {function} onError - call back to define what happens on error
  * @return {Object} - graphQL JSON results
  */
-export const runQuery = async (jsonQuery, onError) => {
+export const runQuery = async (jsonQuery) => {
     const url = '/api/queryproxy';
     const queryResults = await Axios.post(url, jsonQuery).then(r => { 
         return r.data;
     }).catch(e => {
-    if(onError) {
-        onError(e);  
-    }
+      throw new Error(`Error during graphQL access`);
     });
     return get(queryResults, ["data", "launchesPast"], []);
 };
@@ -69,3 +67,15 @@ export const getFormattedDate = (dateString) => {
 
     return dateString;
   };
+
+  /**
+   * method to stringify JSON without adding quotes to the keys
+   * https://stackoverflow.com/questions/11233498/json-stringify-without-quotes-on-properties
+   * @param {Object} obj = simple JSON object
+   * @return {string} - JSON turned into a string without double quotes on the keys
+   */
+  const stringifyObjectWithNoQuotes = (obj) => {
+    const json = JSON.stringify(obj);  
+    const unquoted = json.replace(/"([^"]+)":/g, '$1:');
+    return unquoted;
+  }

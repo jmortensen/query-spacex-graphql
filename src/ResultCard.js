@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {getFormattedDate} from "./utils";
 import './ResultCard.css';
 
@@ -12,17 +12,13 @@ const ResultCard = props => {
     return (
         <div className="container">
             <div className="patch-container">
-                <img className="patch" src={mission_patch_small} /> 
+                <img className="patch" src={mission_patch_small} alt="misson patch" /> 
             </div>
         <div className="container-grid">
-            <div>
-                <p className="property"><span className="lnr lnr-keyboard icon"></span><span className="property-text">Mission: {mission_name}</span></p>
-                <p className="property"><span className="lnr lnr-calendar-full icon"></span><span className="property-text">Launch Date: {getFormattedDate(launch_date_local)}</span></p>
-            </div>
-            <div>
-                <p className="property"><span className="lnr lnr-rocket icon"></span><span className="property-text">Rocket Type: {rocket_name}</span></p>
-                <p className="property"><span className="lnr lnr-film-play icon"></span><span className="property-text">Video Link: <a className="link" href={video_link}>{video_link}</a></span></p>
-            </div>
+            <p className="property"><span className="lnr lnr-keyboard icon"></span><span className="property-text">Mission: {mission_name}</span></p>
+            <p className="property"><span className="lnr lnr-calendar-full icon"></span><span className="property-text">Launch Date: {getFormattedDate(launch_date_local)}</span></p>
+            <p className="property"><span className="lnr lnr-rocket icon"></span><span className="property-text">Rocket Type: {rocket_name}</span></p>
+            <p className="property"><span className="lnr lnr-film-play icon"></span><span className="property-text">Video Link: <a className="link" href={video_link}>{video_link}</a></span></p>
         </div>
       </div>
     );

@@ -10,12 +10,11 @@ function Results(props) {
   
     useEffect(() => {
       if(jsonQuery) {
-        const errorCallBack = e => {
-          setError(e.error);
-        };
-        runQuery(jsonQuery, errorCallBack).then(r => {
+        runQuery(jsonQuery).then(r => {
           setLaunchList(r);
-        })
+        }).catch(e => {
+          setError(e.message);
+        });
       }
     },[jsonQuery]);
     
