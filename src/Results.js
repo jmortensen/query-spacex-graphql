@@ -19,7 +19,7 @@ function Results(props) {
     },[jsonQuery]);
     
     return (
-      <div>
+      <div className="result-list">
         {error && <div><p>Couldn't load any results</p></div>}
         {launchList.map((launch, index) => 
           <ResultCard key={index} launch={launch} />
